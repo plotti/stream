@@ -1,0 +1,35 @@
+<div class="container">
+	<h1>Swissgroove</h1>
+	<table id="datatable" class="table">
+		<thead>
+		<tr>
+			<td></td>
+			<td>Song Artist</td>
+			<td>Song Title</td>
+			<td>Play Count</td>
+			<td>Length</td>
+			<td>Played At</td>
+			<td>Filename</td>
+		</tr>
+		</thead>
+		<tbody>
+		<%@songs.reverse.each do |song| %>
+			<% next if song.length < 60 %>
+			<tr>
+				<td><%= image_tag song.last_fm_data["album"]["image"][1]["content"] rescue "" %></td>
+				<td><%= song.artist %></td>
+				<td><%= link_to song.track, song.last_fm_data["url"] rescue song.track%></td>
+				<td><%= song.last_fm_data["playcount"] rescue ""%></td>
+				<td><%= "%.02f" % (song.length/60.to_f)%>min</td>
+				<td><%= song.played_at.strftime("%d.%m %H:%M") %></td> 
+				<td><%= link_to "play", download_song_path(song) %></td>
+			</tr>
+		<%end%>
+		</tbody>
+	</table>
+</div>
+<script>
+	$(document).ready(function(){
+        $("#datatable").tablesorter(); 
+    });
+</script>
