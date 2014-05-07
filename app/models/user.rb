@@ -1,5 +1,8 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
+  include Mongoid::Letsrate
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -24,6 +27,7 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
+  letsrate_rater
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time

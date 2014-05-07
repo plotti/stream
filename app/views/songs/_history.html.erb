@@ -1,0 +1,30 @@
+<table id="datatable" class="table table-hover lead ">
+	<thead>
+	<tr>
+		<td>Song Artist</td>
+		<td>Song Title</td>
+		<td>Length</td>
+		<td>Played</td>
+		<td>Played At</td>
+		<td></td>
+		<td></td>
+	</tr>
+	</thead>
+	<tbody>
+	<%@songs.reverse.each do |song| %>
+		<% next if song.length < 120 rescue next %>
+		<tr>
+			<!--
+			<td class="col-sm-2"><%= image_tag song.last_fm_data["album"]["image"][1]["content"] rescue image_tag "missing_cover.png" %></td>
+			-->
+			<td class="vert-align col-sm-2" ><%= song.artist %></td>
+			<td class="vert-align col-sm-2"><%= link_to truncate(song.track, :length=>30), song.last_fm_data["url"] rescue truncate(song.track, :length=>30) %></td>
+			<td class="vert-align col-sm-1"><%= "%.02f" % (song.length/60.to_f) rescue 0%>min</td>
+			<td class="vert-align col-sm-1"><%= song.last_fm_data["playcount"] rescue ""%></td>
+			<td class="vert-align col-sm-1"><%= song.played_at.strftime("%d.%m %H:%M") %></td> 
+			<td class="vert-align col-sm-1"><%= link_to "play", download_song_path(song), :class=>"btn btn-default" %></td>
+			<td class="vert-align col-sm-1"><%= rating_for song, :star => 1%></td>
+		</tr>
+	<%end%>
+	</tbody>
+</table>

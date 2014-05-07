@@ -15,6 +15,7 @@ gem "taglib-ruby"
 gem 'mp3_player'
 gem "devise"
 gem 'mongoid-letsrate'
+gem "fssm"
 
 # Gems used only for assets and not required
 # in production environments by default.

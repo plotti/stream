@@ -1,8 +1,15 @@
 class SongsController < ApplicationController
 	respond_to :html, :json
+	before_filter :authenticate_user!
+
+	def current
+		@songs = Song.all.where(:playing => false).sort_by{|s| s.played_at}
+		@current_song = Song.where(:playing => true).first
+	end
 
 	def index
-		@songs = Song.all.sort_by{|s| s.played_at}
+		@current_song = current
+		@songs = Song.all.where(:playing => false).sort_by{|s| s.played_at}
 	end
 
 	def download

@@ -1,0 +1,4 @@
+$('#current_song').html('<%= j render :partial => "song" %>')
+$('#history').html('<%= j render :partial => "history" %>')
+SongPoller.poll();
+applyRaty();
