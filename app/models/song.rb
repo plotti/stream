@@ -27,7 +27,7 @@ class Song
  	   Song.all.each{|s| s.playing = false; s.save}
        self.playing = true
        self.filename = filename 
-       self.played_at => Time.now
+       self.played_at = Time.now
        self.save!
        puts "Playing Song with filename #{self.filename}. Playing: #{self.playing}"
  	end
