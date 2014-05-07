@@ -9,7 +9,7 @@ class SongsController < ApplicationController
 
 	def index
 		@current_song = current
-		@songs = Song.all.where(:playing => false).sort_by{|s| s.played_at}
+		@songs = Song.all.where(:playing => false).sort_by{|s| s.played_at}[0..50]
 	end
 
 	def download

@@ -66,7 +66,8 @@ class Song
 		Dir.glob("#{MP3_PATH}/*").sort_by{|a| File.stat(a).mtime}.each do |item|
 			if !item.include? "incomplete"
 				s = Song.create(:filename => item, :played_at => File.stat(item).mtime)
-				puts item
+				s.length = s.get_length
+				s.save
 			end
 		end
 	end
