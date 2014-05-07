@@ -4,7 +4,7 @@ listener = Listen.to(MP3_PATH, latency: 0.5) do |modified, added, removed|
 	if added != [] && added.first.include?("incomplete")
 	 	s = Song.where(:filename => added.first).first
 	 	if s == nil
-	 		s = Song.create(:filename => added.first, :played_at => File.stat(added.first).mtime)
+	 		s = Song.create(:filename => added.first)
 	 	end
 	 	s.play(added.first)
 	elsif added != [] && !added.first.include?("incomplete")
