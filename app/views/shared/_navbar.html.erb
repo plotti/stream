@@ -1,0 +1,32 @@
+<div class="page-header">
+<h1>ReRadio <small>Get Your Radio back.</small></h1>
+</div>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li <%= "class=active" if current_page? songs_path %> >
+          <%= link_to "Songs", songs_path %>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> </a>
+          <ul class="dropdown-menu">
+            <% if user_signed_in? %>
+              <!-- Signed in as <%= current_user.email %>. Not you? -->
+              <li><%= link_to "Log Out", destroy_user_session_path, :method => "delete" %></li>
+                <% if current_user.email == "plotti@gmx.net" %>
+                  <li><%= link_to "Overview", users_path %></li>
+                <% end %>
+              <% else %>
+              <li><%= link_to "Register", new_user_registration_path %></li>
+              <li><%= link_to "Login", new_user_session_path %></li>
+              <% end %>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

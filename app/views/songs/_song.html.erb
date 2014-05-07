@@ -1,0 +1,29 @@
+<% if @current_song != nil %>
+<table id="datatable" class="table table-hover lead ">
+	<thead>
+		<tr>
+			<td>Song Artist</td>
+			<td>Song Title</td>
+			<td></td>
+			<td>Played</td>
+			<td>Played At</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+		<!--
+		<td class="col-sm-2" ><%= image_tag(@current_song.last_fm_data["album"]["image"][1]["content"], :size => "126x125") rescue image_tag("missing_cover.png", :size => "126x125") %></td>
+	-->
+		<td class="vert-align col-sm-2" ><%= @current_song.artist %></td>
+		<td class="vert-align col-sm-2"><%= link_to truncate(@current_song.track, :length=>30), @current_song.last_fm_data["url"] rescue truncate(@current_song.track, :length=>30) %></td>
+		<td class="vert-align col-sm-1"></td>
+		<td class="vert-align col-sm-1"><%= @current_song.last_fm_data["playcount"] rescue ""%></td>
+		<td class="vert-align col-sm-1"><%= @current_song.played_at.strftime("%d.%m %H:%M") %></td> 
+		<td class="vert-align col-sm-1"></td>
+		<td class="vert-align col-sm-1"><%= rating_for @current_song, :star => 1%></td>
+	</tbody>
+</table>
+<% else %>
+<p class="lead">No song is playing now </p>
+<% end %>

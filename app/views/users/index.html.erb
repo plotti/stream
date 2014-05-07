@@ -1,0 +1,19 @@
+<h3>Übersicht aller Nutzer des Systems</h3>
+<table id="report" class="table">        
+	<thead>    
+ 		<tr>
+  			<th>Email</th>
+   			<th>Anzahl Logins</th>
+   			<th>Letzer Login</th>  
+ 		</tr>
+ 	</thead>
+	<tbody>
+	<% @users.all.each do |user| %>
+	<tr>
+		<td><%= user.email %></td>
+		<td><%= user.sign_in_count %></td>
+		<td><%= user.last_sign_in_at.strftime("%H:%M %d.%m")%>
+	</tr>
+	<% end %>
+	</tbody>
+</table>

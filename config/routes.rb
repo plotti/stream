@@ -1,11 +1,17 @@
 Stream::Application.routes.draw do
+  post '/rate' => 'rater#create', :as => 'rate'
+
   devise_for :users
+  resources :users, :only => [:index, :approve, :block]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
   resources :songs do
     member do
      get "download"
+    end
+    collection do 
+      get "current"
     end
   end
   # Sample of regular route:
