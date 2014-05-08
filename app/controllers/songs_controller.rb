@@ -12,6 +12,13 @@ class SongsController < ApplicationController
 		@songs = Song.all.where(:playing => false).sort_by{|s| s.played_at}.reverse[0..50]
 	end
 
+	def favorite
+		@songs = []
+		Rate.where(:rater_id => current_user.id).each do |rating|
+			@songs << Song.where(:id => rating.rateable_id).first
+		end
+	end
+
 	def download
 		song = Song.find(params[:id])
   		send_data IO.binread(song.filename),

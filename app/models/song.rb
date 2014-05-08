@@ -63,7 +63,7 @@ class Song
 		return out
 	end
 
-	def self.read_in_songs
+	def self.import_all
 		Dir.glob("#{MP3_PATH}/*").sort_by{|a| File.stat(a).mtime}.each do |item|
 			if !item.include? "incomplete"
 				s = Song.create(:filename => item, :played_at => File.stat(item).mtime)

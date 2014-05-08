@@ -7,7 +7,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li <%= "class=active" if current_page? songs_path %> >
-          <%= link_to "Songs", songs_path %>
+          <%= link_to "On Air", songs_path %>
+        </li>
+        <li <%= "class=active" if current_page? favorite_songs_path %> >
+          <%= link_to "Favorite Songs", favorite_songs_path %>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

@@ -12,6 +12,7 @@ Stream::Application.routes.draw do
     end
     collection do 
       get "current"
+      get "favorite"
     end
   end
   # Sample of regular route:
