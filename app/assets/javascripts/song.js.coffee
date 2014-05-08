@@ -1,6 +1,6 @@
 @SongPoller =
   poll: ->
-    setTimeout @request, 2000
+    setTimeout @request, 20000
 
   request: ->
     $.get($('#current_song').data('url'))
