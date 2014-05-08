@@ -16,6 +16,7 @@ gem 'mp3_player'
 gem "devise"
 gem 'mongoid-letsrate'
 gem "unicorn"
+gem 'musicbrainz'
 
 # Gems used only for assets and not required
 # in production environments by default.

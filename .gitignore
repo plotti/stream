@@ -15,3 +15,5 @@
 /tmp
 
 config/mongoid.yml
+#mp3 path
+config/config.yml

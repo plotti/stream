@@ -8,6 +8,7 @@ class User
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  devise :timeoutable, :timeout_in => 24.hours
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""

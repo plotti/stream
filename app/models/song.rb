@@ -14,6 +14,8 @@ class Song
 	field :length, type: Integer
 	field :played_at, type: DateTime
 	field :playing, type: Boolean, default: false
+	field :musicbrainz_album_data, type:Hash
+	field :musicbrainz_song_data, type:Hash
 
 	validates :filename, uniqueness: true
 	after_create :get_additional_data
@@ -48,6 +50,14 @@ class Song
 		self.artist = data.first
 		self.track = data.last
 		self.last_fm_data ||= $lastfm.track.get_info(artist:artist, track:track) rescue {}
+		self.save
+		self.get_musicbrainz
+	end
+
+	def get_musicbrainz
+		self.musicbrainz_album_data = MusicBrainz::Release.find(Song.first.last_fm_data["album"]["mbid"]).instance_values rescue {}
+		#self.musicbrainz_song_data = MusicBrainz::Track.find(Song.first.last_fm_data["mbid"]).instance_values rescue {}
+		puts "Musicbrainz for #{self.track}"
 		self.save
 	end
 
