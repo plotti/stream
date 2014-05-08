@@ -10,6 +10,7 @@ listener = Listen.to(MP3_PATH, latency: 0.5) do |modified, added, removed|
 	elsif added != [] && !added.first.include?("incomplete")
 		data = added.first.split("/").last.gsub(".mp3", "").split(" - ")
 		s = Song.where(:artist => data.first).where(:track => data.last).first
+		puts "TRIGGERED EVENT FOR MOVE DATA: #{data}. SONG #{s}"
 		if s != nil
 			s.move_to_archive(added.first)
 		end
