@@ -3,13 +3,20 @@ class SongsController < ApplicationController
 	before_filter :authenticate_user!
 
 	def current
-		@songs = Song.all.where(:playing => false).sort_by{|s| s.played_at}
+		@songs = Song.all.where(:playing => false).sort_by{|s| s.played_at}.reverse[0..50]
 		@current_song = Song.where(:playing => true).first
 	end
 
 	def index
-		@current_song = current
-		@songs = Song.all.where(:playing => false).sort_by{|s| s.played_at}[0..50]
+		@current_song = Song.where(:playing => true).first
+		@songs = Song.all.where(:playing => false).sort_by{|s| s.played_at}.reverse[0..50]
+	end
+
+	def favorite
+		@songs = []
+		Rate.where(:rater_id => current_user.id).each do |rating|
+			@songs << Song.where(:id => rating.rateable_id).first
+		end
 	end
 
 	def download

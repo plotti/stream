@@ -1,4 +1,4 @@
-MP3_PATH="/Users/plotti/SwissGroove"
+MP3_PATH = YAML.load_file("#{Rails.root}/config/config.yml")["mp3_path"]
 
 listener = Listen.to(MP3_PATH, latency: 0.5) do |modified, added, removed|
 	if added != [] && added.first.include?("incomplete")
