@@ -55,7 +55,7 @@ class Song
 	end
 
 	def get_musicbrainz
-		self.musicbrainz_album_data = MusicBrainz::Release.find(Song.first.last_fm_data["album"]["mbid"]).instance_values rescue {}
+		self.musicbrainz_album_data = MusicBrainz::Release.find(self.last_fm_data["album"]["mbid"]).instance_values rescue {}
 		#self.musicbrainz_song_data = MusicBrainz::Track.find(Song.first.last_fm_data["mbid"]).instance_values rescue {}
 		puts "Musicbrainz for #{self.track}"
 		self.save
