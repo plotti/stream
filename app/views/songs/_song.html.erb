@@ -6,7 +6,7 @@
 				<td>Song Title</td>
 				<td></td>
 				<td>Year</td>
-				<td>Played</td>
+				<td>Popularity</td>
 				<td>Played At</td>
 				<td></td>
 				<td></td>
@@ -19,7 +19,12 @@
 			<td class="vert-align col-sm-1">
 				<%= song.musicbrainz_album_data["date"].strftime("%Y") rescue "n.A" %>
 			</td>
-			<td class="vert-align col-sm-1"><%= @current_song.last_fm_data["playcount"] rescue ""%></td>
+			<td class="vert-align col-sm-1">
+				<div class="progress">
+  					<div class="progress-bar" role="progressbar" style="width:<%= Math.log2(@current_song.last_fm_data["playcount"].to_i).to_i*100/20%>%;">
+  					</div>
+				</div>
+			</td>
 			<td class="vert-align col-sm-1"><%= @current_song.played_at.strftime("%d.%m %H:%M") %></td> 
 			<td class="vert-align col-sm-1"></td>
 			<td class="vert-align col-sm-1">
