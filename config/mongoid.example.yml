@@ -1,7 +1,7 @@
 production:
   sessions:
     default:
-      database: stream_production
+      database: reradio_production
       hosts:
         - localhost:27017
       options:
