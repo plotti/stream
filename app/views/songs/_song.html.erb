@@ -21,7 +21,7 @@
 			</td>
 			<td class="vert-align col-sm-1">
 				<div class="progress">
-  					<div class="progress-bar" role="progressbar" style="width:<%= Math.log2(@current_song.last_fm_data["playcount"].to_i).to_i*100/20%>%;">
+  					<div class="progress-bar" role="progressbar" style="width:<%= Math.log2(@current_song.last_fm_data["playcount"].to_i).to_i*100/20 rescue 0 %>%;">
   					</div>
 				</div>
 			</td>
