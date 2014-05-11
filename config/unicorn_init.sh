@@ -5,9 +5,9 @@ set -e
 
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
-APP_ROOT=/var/www/stream
+APP_ROOT=/var/www/reradio/current
 PID=$APP_ROOT/tmp/pids/unicorn.pid
-CMD="unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
+CMD="cd $APP_ROOT; bundle exec unicorn -D -c $APP_ROOT/config/unicorn.rb -E production"
 action="$1"
 set -u
 
