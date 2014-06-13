@@ -1,13 +1,13 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
 
-server "reradio.ch", :web, :app, :db, primary: true
+server "92.51.130.129", :web, :app, :db, primary: true
 
 set :application, "reradio"
 set :user, "root"
 set :port, 22 #your ssh port
 set :deploy_to, "/var/www/#{application}"
-set :deploy_via, :remote_cache
+#set :deploy_via, :remote_cache
 set :use_sudo, false
 set :rvm_type, :system
 
@@ -33,6 +33,7 @@ namespace :deploy do
   task :setup_config, roles: :app do
     # symlink the unicorn init file in /etc/init.d/
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     # create a shared directory to keep files that are not in git and that are used for the application
     run "mkdir -p #{shared_path}/config"
     # if you're using mongoid, create a mongoid.template.yml file and fill it with your production configuration
