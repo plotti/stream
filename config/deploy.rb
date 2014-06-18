@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
 
-server "92.51.130.129", :web, :app, :db, primary: true
+server "reradio.ch", :web, :app, :db, primary: true
 
 set :application, "reradio"
 set :user, "root"
