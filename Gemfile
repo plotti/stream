@@ -19,7 +19,7 @@ gem "unicorn"
 gem 'musicbrainz'
 gem 'capistrano', '~> 2.15.4'
 gem 'rvm-capistrano', '~> 1.5.1'
-
+gem "airbrake"
 
 # Gems used only for assets and not required
 # in production environments by default.
