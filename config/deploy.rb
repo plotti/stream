@@ -26,7 +26,7 @@ namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} puma server"
     task command, roles: :app, except: { no_release: true } do
-      run "pumactl -F config/puma.rb #{command}"
+      run "pumactl -F #{current_path}/config/puma.rb #{command}"
     end
   end
 
