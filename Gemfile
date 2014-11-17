@@ -5,6 +5,7 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem "puma"
 gem 'sqlite3'
 gem 'mongoid', '~>3.0.4'
 gem 'listen', '~> 2.0'
