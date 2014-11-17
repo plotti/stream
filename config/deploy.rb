@@ -24,15 +24,15 @@ after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 namespace :deploy do
   %w[start stop restart].each do |command|
-    desc "#{command} unicorn server"
+    desc "#{command} puma server"
     task command, roles: :app, except: { no_release: true } do
-      run "/etc/init.d/unicorn_#{application} #{command}"
+      run "pumactl -F config/puma.rb #{command}"
     end
   end
 
   task :setup_config, roles: :app do
     # symlink the unicorn init file in /etc/init.d/
-    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    # sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     # create a shared directory to keep files that are not in git and that are used for the application
     run "mkdir -p #{shared_path}/config"
@@ -40,6 +40,7 @@ namespace :deploy do
     # and add your mongoid.yml file to .gitignore
     put File.read("config/mongoid.example.yml"), "#{shared_path}/config/mongoid.yml"
     put File.read("config/config.example.yml"), "#{shared_path}/config/config.yml"
+    put File.read("config/puma.example.rb", "#{shared_path}/config/puma.rb")
 
     puts "Now edit the config files in #{shared_path}."
   end
@@ -49,6 +50,8 @@ namespace :deploy do
     # symlink the shared mongoid config file in the current release
     run "ln -nfs #{shared_path}/config/mongoid.yml #{release_path}/config/mongoid.yml"
     run "ln -nfs #{shared_path}/config/config.yml #{release_path}/config/config.yml"
+    run "ln -nfs #{shared_path}/config/puma.rb #{release_path}/config/puma.rb"
+
   end
   after "deploy:finalize_update", "deploy:symlink_config"
 
