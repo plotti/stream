@@ -40,7 +40,7 @@ namespace :deploy do
     # and add your mongoid.yml file to .gitignore
     put File.read("config/mongoid.example.yml"), "#{shared_path}/config/mongoid.yml"
     put File.read("config/config.example.yml"), "#{shared_path}/config/config.yml"
-    put File.read("config/puma.example.rb", "#{shared_path}/config/puma.rb")
+    put File.read("config/puma.example.rb"), "#{shared_path}/config/puma.rb"
 
     puts "Now edit the config files in #{shared_path}."
   end
