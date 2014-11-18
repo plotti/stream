@@ -64,6 +64,13 @@ namespace :deploy do
   end
   after "deploy:update", "deploy:mongoid_indexes"
 
+  desc "Start Streamripper"
+  task :re_start_streamripper do 
+    run "ps aux | grep streamripper | grep -v grep | awk '{print 'kill -9 '' $2}' | sh"
+    run "streamripper http://swissgroove.ice.infomaniak.ch:80/swissgroove-128 -d /var/mp3/ --quiet &"
+  end
+  after "deploy:update", "deploy:re_start_streamripper"
+
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :web do
     unless `git rev-parse HEAD` == `git rev-parse origin/master`
