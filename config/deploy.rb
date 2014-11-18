@@ -1,6 +1,9 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
 
+#Manage the puma jungle
+#https://github.com/puma/puma/tree/master/tools/jungle/init.d
+
 server "reradio.ch", :web, :app, :db, primary: true
 
 set :application, "reradio"
@@ -26,7 +29,7 @@ namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} puma server"
     task command, roles: :app, except: { no_release: true } do
-      run "pumactl -F #{current_path}/config/puma.rb #{command}"
+      run "cd #{current_path} && pumactl -F config/puma.rb #{command}"
     end
   end
 
